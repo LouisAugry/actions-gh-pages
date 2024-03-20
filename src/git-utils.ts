@@ -216,6 +216,7 @@ export async function commit(allowEmptyCommit: boolean, msg: string): Promise<vo
 }
 
 export async function push(branch: string, forceOrphan: boolean): Promise<void> {
+  await exec.exec('git', ['pull', '--rebase', branch]);
   if (forceOrphan) {
     await exec.exec('git', ['push', 'origin', '--force', branch]);
   } else {
